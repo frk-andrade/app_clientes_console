@@ -1,17 +1,7 @@
-mod models;
+mod tela;
 
-use models::cliente::Cliente;
-
-use crate::models::cliente;
-
+use tela::menu as menu;
 
 fn main() {
-    let cliente: Cliente = Cliente{
-        id: 1,
-        nome: "teste".to_string(),
-        cpf: "12345678900".to_string(),
-        endereco: "Rua teste".to_string(),
-    };
-
-    println!("Cliente: {}", cliente.nome);
+    menu::mostrar_menu();
 }
