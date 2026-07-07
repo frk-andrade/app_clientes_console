@@ -1,4 +1,4 @@
-use crate::models::cliente::{self, Cliente};
+use crate::models::cliente::Cliente;
 use crate::tela::ler::{ler_dados, ler_dados_int};
 use crate::tela::op_basicas::{esperar, limpar_tela};
 
@@ -51,6 +51,33 @@ pub fn alterar_cliente(clientes: &mut Vec<Cliente>) {
     esperar(1);
 }
 
+pub fn excluir_cliente(clientes: &mut Vec<Cliente>) {
+    limpar_tela();
+     if nao_tem_clientes(clientes) {
+        return;
+    }
+    
+    let id = captura_id();
+    if let Some((indice, cliente)) = buscar_cliente_por_id(clientes, id) {
+        println!("{}", "-".to_string().repeat(40));
+        println!("Confirma a exclusão do cliente abaixo?");
+        println!("{}", "-".to_string().repeat(40));
+        mostrar_cliente(cliente);
+        println!("{}", "-".to_string().repeat(40));
+        println!("s - Sim\nn - Não");
+        let opcao = ler_dados();
+        if opcao == "s" {
+            clientes.remove(indice);
+            limpar_tela();
+            println!("Cliente excluído com sucesso!");
+            esperar(1);
+        } 
+    } else {
+        limpar_tela();
+        println!("Cliente não encontrado!");
+    }
+}
+
 fn buscar_cliente_por_id(clientes: &Vec<Cliente>, id: usize) -> Option<(usize, &Cliente)> {
     clientes.iter().enumerate().find(|(_, cliente)| cliente.id == id)
 }
@@ -75,6 +102,7 @@ pub fn listar_clientes(clientes: &mut Vec<Cliente>) {
     }
 
     println!("{}", "-".to_string().repeat(40));
+    
     for cliente in clientes {
         mostrar_cliente(cliente);
         println!("{}", "-".to_string().repeat(40));

@@ -1,4 +1,4 @@
-use crate::{models::cliente::Cliente, tela::{ler::{ler_dados, ler_dados_int}, op_basicas::{esperar, limpar_tela}, servico_cliente::*}};
+use crate::{models::cliente::Cliente, tela::{ler::{ler_dados_int}, op_basicas::{limpar_tela}, servico_cliente::*}};
 
 pub fn mostrar_menu(clientes: &mut Vec<Cliente>){
     
@@ -21,7 +21,7 @@ pub fn mostrar_menu(clientes: &mut Vec<Cliente>){
         match opcao {
             1 => incluir_cliente(clientes),
             2 => alterar_cliente(clientes),
-            3 => println!("Opção 3 selecionada: Excluir cliente"),
+            3 => excluir_cliente(clientes),
             4 => listar_clientes(clientes),
             5 => {
                 println!("Opção 5 selecionada: Sair do programa...");
