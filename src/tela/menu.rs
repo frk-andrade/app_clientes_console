@@ -1,6 +1,6 @@
-use crate::tela::{ler::{ler_dados, ler_dados_int}, op_basicas::{limpar_tela, esperar}};
+use crate::{models::cliente::Cliente, tela::{ler::{ler_dados, ler_dados_int}, op_basicas::{esperar, limpar_tela}, servico_cliente::*}};
 
-pub fn mostrar_menu(){
+pub fn mostrar_menu(clientes: &mut Vec<Cliente>){
     
     loop {
 
@@ -19,10 +19,10 @@ pub fn mostrar_menu(){
         let opcao = ler_dados_int();
         limpar_tela();
         match opcao {
-            1 => println!("Opção 1 selecionada: Cadastrar cliente"),
+            1 => incluir_cliente(clientes),
             2 => println!("Opção 2 selecionada: Alterar cliente"),
             3 => println!("Opção 3 selecionada: Excluir cliente"),
-            4 => println!("Opção 4 selecionada: Listar clientes"),
+            4 => listar_clientes(clientes),
             5 => {
                 println!("Opção 5 selecionada: Sair do programa...");
                 return;
@@ -32,6 +32,5 @@ pub fn mostrar_menu(){
 
         // println!("Pressione Enter para continuar...");
         // ler_dados();
-        esperar(2);
     }
 }
